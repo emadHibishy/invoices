@@ -81,7 +81,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(StoreCategoryRequest $request)
     {
         $category = Category::findorFail((int)$request->id);
         try {
