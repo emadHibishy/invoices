@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('categories.update', 'update') }}" method="POST" autocomplete="off">
+                <form action="{{ route('categories.update','update') }}" method="POST" autocomplete="off">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="id" value="{{ $category->id }}">

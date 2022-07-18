@@ -14,6 +14,7 @@ return [
     'dashboard' => 'Dashboard',
     'home' => 'Home',
     'categories' => 'Categories',
+    'products' => 'Products',
     'settings' => 'Settings',
 
 ];

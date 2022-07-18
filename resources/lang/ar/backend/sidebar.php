@@ -14,5 +14,6 @@ return [
     'dashboard' => 'لوحة التحكم',
     'home' => 'الرئيسية',
     'categories' => 'الأقسام',
+    'products' => 'المنتجات',
     'settings' => 'الإعدادات',
 ];

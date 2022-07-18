@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -32,11 +33,17 @@ Route::group(
 
                 // Categories Routes
                 Route::resource('/categories',CategoryController::class);
+
+                // ؛قخيعؤفس Routes
+                Route::resource('/products',ProductController::class);
             }
         );
         require __DIR__.'/auth.php';
 
 
+});
+Route::get("/", function (){
+    return redirect(route("login"));
 });
 
 

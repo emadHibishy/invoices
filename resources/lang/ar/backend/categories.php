@@ -27,7 +27,7 @@ return [
     'en_category_name' => 'اسم القسم بالإنجليزية',
     'ar_description' => 'الوصف بالعربية',
     'en_description' => 'الوصف بالإنجليزية',
-    'submit' => 'حفظ',
+    'submit' => 'حفظ البيانات',
     'update' => 'تعديل',
     'cancel' => 'إلغاء',
     'category_added' => 'تم إضافة القسم بنجاح.',

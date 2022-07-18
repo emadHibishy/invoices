@@ -26,6 +26,8 @@
 
                     <!-- Categories-->
                     <li> <a href="{{ route('categories.index') }}">{{ __('backend/sidebar.categories') }} </a> </li>
+                    <!-- Products-->
+                    <li> <a href="{{ route('products.index') }}">{{ __('backend/sidebar.products') }} </a> </li>
                     <li> <a href="calendar-list.html">List Calendar</a> </li>
                 </ul>
             </li>
