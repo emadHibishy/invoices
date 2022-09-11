@@ -16,5 +16,6 @@ return [
     'categories' => 'Categories',
     'products' => 'Products',
     'settings' => 'Settings',
+    'warehouses' => 'Warehouses',
 
 ];

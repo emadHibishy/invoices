@@ -13,6 +13,7 @@ return [
     'ar_product_name' => 'Product Name In Arabic',
     'en_product_name' => 'Product Name In English',
     'category_name' => 'Category Name',
+    'uom' => 'UOM',
     'price' => 'Product Price',
     'ar_notes' => 'Notes In English',
     'en_notes' => 'Notes In Arabic',

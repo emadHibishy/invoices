@@ -54,13 +54,24 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col">
-                            <label>{{ __('backend/products.category_name') }}</label>
-                            <select name="category_id" class="form-control p-1" id="">
-                                <option value="" disabled selected>{{ __('backend/products.select') }}</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                @endforeach
-                            </select>
+                            <div class="col">
+                                <label>{{ __('backend/products.category_name') }}</label>
+                                <select name="category_id" class="form-control p-1" id="">
+                                    <option value="" disabled selected>{{ __('backend/products.select') }}</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label>{{ __('backend/products.uom') }}</label>
+                                <select name="uom_id" class="form-control p-1" id="">
+                                    <option value="" disabled selected>{{ __('backend/products.select') }}</option>
+                                    @foreach($uoms as $uom)
+                                        <option value="{{ $uom->id }}">{{ $uom->uom_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="col">
                             <label>{{ __('backend/products.price') }}</label>

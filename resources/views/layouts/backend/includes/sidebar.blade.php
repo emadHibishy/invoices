@@ -4,17 +4,40 @@
         <ul class="nav navbar-nav side-menu" id="sidebarnav">
             <!-- menu item Dashboard-->
             <li>
-                <a href="{{ route('dashboard') }}" >
-                    <div class="pull-left"><i class="ti-home"></i><span class="right-nav-text">{{ trans('backend/sidebar.dashboard') }}</span></div>
+{{--                <a href="{{ route('dashboard') }}" >--}}
+{{--                    <div class="pull-left"><i class="ti-home"></i><span class="right-nav-text">{{ trans('backend/sidebar.dashboard') }}</span></div>--}}
 {{--                    <div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div>--}}
                 </a>
-{{--                <ul id="dashboard" class="collapse" data-parent="#sidebarnav">--}}
-{{--                    <li> <a href="index.html">{{ __('backend/sidebar.categories') }}</a> </li>--}}
-{{--                </ul>--}}
             </li>
-            <!-- menu title -->
-{{--            <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Components </li>--}}
-            <!-- menu item Elements-->
+
+
+            <!-- Categories-->
+            <li>
+                <a href="{{ route('categories.index') }}">
+                    <i class="ti-layers-alt"></i>
+                    <span class="right-nav-text">{{ __('backend/sidebar.categories') }} </span>
+                </a>
+            </li>
+
+            <!-- Products-->
+            <li>
+                <a href="{{ route('products.index') }}">
+                    <i class="fa fa-product-hunt"></i>
+                    <span class="right-nav-text">{{ __('backend/sidebar.products') }} </span>
+                </a>
+            </li>
+
+            <!-- Warehouse-->
+            <li>
+                <a href="javascript:void(0);" data-toggle="collapse" data-target="#warehouse">
+                    <div class="pull-left"><i class="fa fa-bank"></i><span class="right-nav-text">{{ __('backend/sidebar.warehouses') }}</span></div>
+                    <div class="pull-right"><i class="ti-plus"></i></div><div class="clearfix"></div>
+                </a>
+                <ul id="warehouse" class="collapse" data-parent="#sidebarnav">
+                    <li> <a href="{{ route('warehouses.index') }}">{{ __('backend/warehouses.warehouses_ist') }}</a> </li>
+                    <li> <a href="{{ route('transactions.index') }}">{{ __('backend/transactions.warehouse_transactions') }}</a> </li>
+                </ul>
+            </li>
 
             <!-- Settings-->
             <li>
@@ -28,19 +51,7 @@
                     <li> <a href="{{ route('categories.index') }}">{{ __('backend/sidebar.categories') }} </a> </li>
                     <!-- Products-->
                     <li> <a href="{{ route('products.index') }}">{{ __('backend/sidebar.products') }} </a> </li>
-                    <li> <a href="calendar-list.html">List Calendar</a> </li>
                 </ul>
-            </li>
-
-{{--            <li>--}}
-{{--                <a href="{{ route('categories.index') }}" >--}}
-{{--                    <div class="pull-left"><i class="ti-layers-alt"></i><span class="right-nav-text">{{ __('backend/sidebar.categories') }}</span></div>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
-            <!-- menu item chat-->
-            <li>
-                <a href="chat-page.html"><i class="ti-comments"></i><span class="right-nav-text">Chat </span></a>
             </li>
             <!-- menu item mailbox-->
             <li>

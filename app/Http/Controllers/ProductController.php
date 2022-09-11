@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
+use App\Models\Helper\UOM;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+//        dd($products);
         return view('backend.products.index', compact('products'));
     }
 
@@ -28,7 +30,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('backend.products.create', compact('categories'));
+        $uoms = UOM::all();
+        return view('backend.products.create', compact('categories', 'uoms'));
     }
 
     /**
@@ -44,6 +47,7 @@ class ProductController extends Controller
                'name' => ['ar'=> $request->name, 'en' => $request->name_en],
                 'price' => $request->price,
                 'category_id' => $request->category_id,
+                'uom_id' => $request->uom_id,
                 'notes' => ['ar'=> $request->ar_notes, 'en' => $request->en_notes],
             ]);
             session()->flash('add', __('backend/products.product_added'));
@@ -73,7 +77,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('backend.products.edit', compact('product', 'categories'));
+        $uoms = UOM::all();
+        return view('backend.products.edit', compact('product', 'categories', 'uoms'));
     }
 
     /**
@@ -89,6 +94,7 @@ class ProductController extends Controller
             $product->update([
                 'name' => ['ar' => $request->name, 'en' => $request->name_en],
                 'category_id' => $request->category_id,
+                'uom_id' => $request->uom_id,
                 'price' => $request->price,
                 'notes' => ['ar' => $request->ar_notes , 'en' => $request->en_notes]
             ]);

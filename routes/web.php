@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\WarehouseTrnsactionsController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -34,8 +36,14 @@ Route::group(
                 // Categories Routes
                 Route::resource('/categories',CategoryController::class);
 
-                // ؛قخيعؤفس Routes
+                // Products Routes
                 Route::resource('/products',ProductController::class);
+
+                //Warehouses Routes
+                Route::resource('warehouses', WarehouseController::class);
+
+                //transactions Routes
+                Route::resource('transactions', WarehouseTrnsactionsController::class);
             }
         );
         require __DIR__.'/auth.php';

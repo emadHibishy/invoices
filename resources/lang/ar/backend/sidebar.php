@@ -16,4 +16,5 @@ return [
     'categories' => 'الأقسام',
     'products' => 'المنتجات',
     'settings' => 'الإعدادات',
+    'warehouses' => 'المخازن',
 ];

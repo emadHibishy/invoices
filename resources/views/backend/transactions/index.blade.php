@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 @section('title')
-     - {{ __('backend/sidebar.products') }}
+     - {{ __('backend/transactions.warehouse_transactions') }}
 @endsection
 
 
@@ -15,12 +15,12 @@
     <div class="page-title">
         <div class="row">
             <div class="col-sm-6">
-                <h4 class="mb-0"> {{ __('backend/sidebar.products') }}</h4>
+                <h4 class="mb-0"> {{ __('backend/transactions.warehouse_transactions') }}</h4>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}" class="default-color">{{ __('backend/sidebar.home') }}</a></li>
-                    <li class="breadcrumb-item active">{{ __('backend/sidebar.products') }}</li>
+                    <li class="breadcrumb-item active">{{ __('backend/transactions.warehouse_transactions') }}</li>
                 </ol>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 @include('backend.messages')
                 <div class="row">
                     <div class="col mb-3">
-                        <a href="{{ route('products.create') }}" class="btn btn-success" role="button">{{ __('backend/products.add_product') }}</a>
+                        <a href="{{ route('transactions.create') }}" class="btn btn-success" role="button">{{ __('backend/transactions.add_transaction') }}</a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -40,26 +40,28 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>{{ __('backend/transactions.transaction_number') }}</th>
+                                <th>{{ __('backend/transactions.transaction_type') }}</th>
+                                <th>{{ __('backend/warehouses.code') }}</th>
                                 <th>{{ __('backend/products.name') }}</th>
-                                <th>{{ __('backend/products.category_name') }}</th>
-                                <th>{{ __('backend/products.uom') }}</th>
-                                <th>{{ __('backend/products.price') }}</th>
-                                <th>{{ __('backend/products.operations') }}</th>
+                                <th>{{ __('backend/transactions.status') }}</th>
+                                <th>{{ __('backend/transactions.operations') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @forelse($products as $product)
+                        @forelse($transactions as $transaction)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->category->category_name }}</td>
-                                <td>{{ $product->UOM->uom_name }}</td>
-                                <td>{{ $product->price }}</td>
+                                <td>{{ $transaction->transaction_number }}</td>
+                                <td>{{ $transaction->transaction_type->type_name }}</td>
+                                <td>{{ $transaction->warehouse->code }}</td>
+                                <td>{{ $transaction->product->name }}</td>
+                                <td>{{ $transaction->status }}</td>
                                 <td>
-                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-success btn-sm" title="{{ __('backend/products.edit') }}">
+                                    <a href="{{ route('transactions.edit', $transaction) }}" class="btn btn-success btn-sm" title="{{ __('backend/transactions.edit') }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <button class="btn btn-danger btn-sm" data-prod_id="{{ $product->id }}" title="{{ __('backend/products.delete') }}" data-toggle="modal" data-target="#deleteProduct">
+                                    <button class="btn btn-danger btn-sm" data-transaction_id="{{ $transaction->id }}" title="{{ __('backend/transactions.delete') }}" data-toggle="modal" data-target="#deletetransaction">
                                         <i class="fa fa-trash"></i>
                                     </button>
 {{--                                    <a href="{{ route('products.destroy', $product) }}" class="btn btn-danger btn-sm" title="{{ __('backend/products.delete') }}">--}}
@@ -69,7 +71,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4"><p class="text-danger text-center">{{ __('backend/products.no_products') }}</p></td>
+                                <td colspan="7"><p class="text-danger text-center">{{ __('backend/transactions.no_transations') }}</p></td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -79,18 +81,18 @@
             </div>
         </div>
     </div>
-    @include('backend.products.delete')
+    @include('backend.transactions.delete')
 @endsection
 
 
 
 @section('js')
     <script>
-        $('#deleteProduct').on('show.bs.modal', function(event){
+        $('#deletetransaction').on('show.bs.modal', function(event){
             let button = $(event.relatedTarget)
-            let prod_id = button.data('prod_id')
+            let transaction_id = button.data('transaction_id')
             let modal = $(this)
-            modal.find('.modal-body #prod_id').val(prod_id)
+            modal.find('.modal-body #transaction_id').val(transaction_id)
         })
     </script>
 

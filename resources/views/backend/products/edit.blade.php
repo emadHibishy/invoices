@@ -59,6 +59,16 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="col">
+                                <label>{{ __('backend/products.uom') }}</label>
+                                <select name="uom_id" class="form-control p-1" id="">
+                                    <option value="" disabled>{{ __('backend/products.select') }}</option>
+                                    @foreach($uoms as $uom)
+                                        <option value="{{ $uom->id }}" {{ $uom->id == $product->uom_id ? 'selected' : '' }}>{{ $uom->uom_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="col">
                                 <label>{{ __('backend/products.price') }}</label>
                                 <input type="number" name="price" value="{{ $product->price }}" class="form-control" >
