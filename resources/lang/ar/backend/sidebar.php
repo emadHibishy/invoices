@@ -17,4 +17,8 @@ return [
     'products' => 'المنتجات',
     'settings' => 'الإعدادات',
     'warehouses' => 'المخازن',
+    'terms' => 'شروط الدفع',
+    'territories' => 'قطاعات البيع',
+    'customers' => 'العملاء',
+    'invoices' => 'الفواتير',
 ];

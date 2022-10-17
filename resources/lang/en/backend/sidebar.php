@@ -17,5 +17,9 @@ return [
     'products' => 'Products',
     'settings' => 'Settings',
     'warehouses' => 'Warehouses',
+    'terms' => 'Payment Terms',
+    'territories' => 'Territories',
+    'customers' => 'Customers',
+    'invoices' => 'Invoices',
 
 ];

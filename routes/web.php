@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TerritoryController;
 use App\Http\Controllers\WarehouseController;
-use App\Http\Controllers\WarehouseTrnsactionsController;
+use App\Http\Controllers\WarehouseTransactionsController;
+use App\Http\Controllers\PaymentTermController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -43,7 +47,20 @@ Route::group(
                 Route::resource('warehouses', WarehouseController::class);
 
                 //transactions Routes
-                Route::resource('transactions', WarehouseTrnsactionsController::class);
+                Route::resource('transactions', WarehouseTransactionsController::class);
+                Route::get('transactions/product_on_hand/{warehouse_id}/{product_id}', [WarehouseTransactionsController::class, 'getWarehouseQty'])->name('onhand');
+
+                //payment_terms Routes
+                Route::resource('terms', PaymentTermController::class);
+
+                //Territories Routes
+                Route::resource('territories', TerritoryController::class);
+
+                //Customers Routes
+                Route::resource('customers', CustomerController::class);
+
+                //Invoices Routes
+                Route::resource('invoices', InvoiceController::class);
             }
         );
         require __DIR__.'/auth.php';
@@ -55,12 +72,7 @@ Route::get("/", function (){
 });
 
 
-//Route::group(
-//    [
-//        'prefix' => LaravelLocalization::setLocale(),
-//        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-//    ], function(){ //...
-//});
+
 
 
 

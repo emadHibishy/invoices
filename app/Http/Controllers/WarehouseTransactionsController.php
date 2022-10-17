@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Requests\StoreTransactionRequest;
-use App\Models\Helper\UOM;
+use App\Models\Helper\TransactionsTypes;
 use App\Models\Product;
-use App\Models\TransactionsTypes;
 use App\Models\Warehouse;
-use App\Models\WarehouseTrnsactions;
+use App\Models\WarehouseTransactions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class WarehouseTrnsactionsController extends Controller
+class WarehouseTransactionsController extends Controller
 {
 
-    private $counter = 1;
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +21,7 @@ class WarehouseTrnsactionsController extends Controller
      */
     public function index()
     {
-        $transactions = WarehouseTrnsactions::all();
+        $transactions = WarehouseTransactions::all();
         return view('backend.transactions.index', compact('transactions'));
     }
 
@@ -52,11 +52,11 @@ class WarehouseTrnsactionsController extends Controller
             $onhandQty = $this->getWarehouseQty($request->warehouse_id, $request->product_id);
             if($request->transaction_type_id == 1 && $request->qty < $onhandQty)
                 return redirect()->back()->withErrors(['error' => __('backend/transactions.qty_notfound1') . $onhandQty . __('backend/transactions.qty_notfound2')]);
-            $transaction_number = $this->makeTransactionNumber($request->transaction_type_id);
+//            $transaction_number = $this->makeTransactionNumber($request->transaction_type_id);
             $uom_id = Product::find($request->product_id)->uom_id;
 
-            WarehouseTrnsactions::create([
-                'transaction_number' => $transaction_number,
+            WarehouseTransactions::create([
+                'transaction_number' => Helper::serializa($request->transaction_type_id == 1 ? 'ISS' : 'ADD', WarehouseTransactions::class, WarehouseTransactions::LENGTH),
                 'transaction_type_id' => $request->transaction_type_id,
                 'warehouse_id' => $request->warehouse_id,
                 'product_id' => $request->product_id,
@@ -67,7 +67,6 @@ class WarehouseTrnsactionsController extends Controller
                 'notes' => ['ar' => $request->ar_notes , 'en' => $request->en_notes]
             ]);
             session()->flash('add' , __('backend/transactions.transaction_added'));
-            $this->counter++;
             return redirect()->back();
         } catch (\Exception $err)
         {
@@ -78,10 +77,10 @@ class WarehouseTrnsactionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\WarehouseTrnsactions  $warehouseTrnsactions
+     * @param  \App\Models\WarehouseTransactions  $warehouseTransactions
      * @return \Illuminate\Http\Response
      */
-    public function show(WarehouseTrnsactions $warehouseTrnsactions)
+    public function show(WarehouseTransactions $warehouseTransactions)
     {
         //
     }
@@ -89,10 +88,10 @@ class WarehouseTrnsactionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\WarehouseTrnsactions  $warehouseTrnsactions
+     * @param  \App\Models\WarehouseTransactions  $warehouseTransactions
      * @return \Illuminate\Http\Response
      */
-    public function edit(WarehouseTrnsactions $warehouseTrnsactions)
+    public function edit(WarehouseTransactions $warehouseTransactions)
     {
         //
     }
@@ -101,10 +100,10 @@ class WarehouseTrnsactionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\WarehouseTrnsactions  $warehouseTrnsactions
+     * @param  \App\Models\WarehouseTransactions  $warehouseTransactions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WarehouseTrnsactions $warehouseTrnsactions)
+    public function update(Request $request, WarehouseTransactions $warehouseTransactions)
     {
         //
     }
@@ -112,26 +111,29 @@ class WarehouseTrnsactionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\WarehouseTrnsactions  $warehouseTrnsactions
+     * @param  \App\Models\WarehouseTransactions  $warehouseTransactions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WarehouseTrnsactions $warehouseTrnsactions)
+    public function destroy(WarehouseTransactions $warehouseTransactions)
     {
         //
     }
 
 
-    private function getWarehouseQty($warehouse_id, $product_id)
+    public function getWarehouseQty($warehouse_id, $product_id)
     {
-        return WarehouseTrnsactions::where('warehouse_id', $warehouse_id)
+        return WarehouseTransactions::where('warehouse_id', $warehouse_id)
             ->where('product_id', $product_id)
             ->where('status', 1)
             ->sum('qty');
     }
 
-    private function makeTransactionNumber($transaction_type_id)
-    {
-        $prefix = $transaction_type_id == 1 ? 'ISS' : 'ADD';
-        return $prefix . str_repeat(0, 20 - (strlen($prefix . $this->counter))) . $this->counter;
-    }
+//    private function makeTransactionNumber($transaction_type_id)
+//    {
+//        $prefix = $transaction_type_id == 1 ? 'ISS' : 'ADD';
+//        $last_transaction = DB::table('warehouse_transactions')->orderByDesc('id')->first()->id;
+//        $last_id = is_null($last_transaction) ? 0 : $last_transaction->id;
+//        return $prefix . str_repeat(0, 20 - (strlen($prefix . $last_id++))) . $last_id++;
+//    }
+
 }

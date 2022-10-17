@@ -11,6 +11,9 @@ class Category extends Model
     use HasFactory;
     use HasTranslations;
 
+
+    public $timestamps = false;
+
     protected $fillable = ['category_name','description'];
     public $translatable = ['category_name','description'];
 

@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\Helper\TransactionsTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class WarehouseTrnsactions extends Model
+class WarehouseTransactions extends Model
 {
     use HasFactory;
     use HasTranslations;
 
     protected $guarded = [];
     public $translatable = ['notes'];
+    public const LENGTH = 20;
 
     public function transaction_type()
     {

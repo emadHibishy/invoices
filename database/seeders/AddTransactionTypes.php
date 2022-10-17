@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\TransactionsTypes;
+use App\Models\Helper\TransactionsTypes;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

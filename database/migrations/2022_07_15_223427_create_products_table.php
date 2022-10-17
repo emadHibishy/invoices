@@ -22,6 +22,11 @@ class CreateProductsTable extends Migration
                     ->on('categories')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->foreignId('uom_id')
+                ->references('id')
+                ->on('unit_of_measures')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->text('notes')->nullable();
             $table->timestamps();
         });

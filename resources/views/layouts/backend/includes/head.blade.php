@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}" />
 
     <!-- Font -->
-{{--    <link  rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:200,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900">--}}
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
 
     <!-- css -->
     @if(App::getLocale() == 'ar')
