@@ -11,6 +11,8 @@ class TransactionsTypes extends Model
     use HasFactory;
     use HasTranslations;
 
+    public $timestamps = false;
+
     protected $fillable = ['type_name', 'value'];
     public $translatable = ['type_name'];
 }

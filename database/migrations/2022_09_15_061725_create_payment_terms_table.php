@@ -18,7 +18,6 @@ class CreatePaymentTermsTable extends Migration
             $table->string('name')->unique();
             $table->text('description');
             $table->integer('days');
-//            $table->timestamps();
         });
     }
 

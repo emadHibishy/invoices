@@ -17,7 +17,6 @@ class CreateTransactionsTypesTable extends Migration
             $table->id();
             $table->string('type_name')->unique();
             $table->decimal('value');
-            $table->timestamps();
         });
     }
 

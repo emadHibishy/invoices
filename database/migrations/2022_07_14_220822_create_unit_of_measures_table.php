@@ -17,7 +17,6 @@ class CreateUnitOfMeasuresTable extends Migration
             $table->id();
             $table->string('uom_code', 4)->unique();
             $table->string('uom_name')->unique();
-            $table->timestamps();
         });
     }
 
